@@ -23,7 +23,7 @@ impl RedisCache {
     /// Set a value in Redis.
     /// It gets a connection from the pool by cloning the manager.
     pub async fn set_value(&self, key: &str, value: &str) -> Result<()> {
-        let mut con = self.con.clone(); // Clone is cheap, gets a connection
+        let mut con = self.con.clone();
         let () = con.set(key, value).await.context("Redis SET command failed")?;
         Ok(())
     }
